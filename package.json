@@ -13,7 +13,8 @@
     "build": "tsc",
     "migrate": "prisma migrate deploy",
     "start": "node dist/index.js",
-    "migrate:start": "yarn migrate && yarn start"
+    "migrate:start": "yarn migrate && yarn start",
+    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "@types/express": "^4.17.14",
