@@ -1,17 +1,18 @@
 import { PrismaClient } from "@prisma/client";
 import express from "express";
 
+// Import routes
+import userRoutes from "./routes/user-routes";
+
+// Export the client to use in the app
+export const prisma = new PrismaClient();
+
+// Setup the server
 const app = express();
-const client = new PrismaClient();
+app.use(express.json());
 
-app.get("/", async (req, res) => {
-  res.status(200).json(await client.example.findMany());
-});
+// User routes
+app.use("/", userRoutes);
 
-app.post("/", async (req, res) => {
-  const item = await client.example.create({ data: {} });
-
-  res.status(200).json(item);
-});
-
+// Start server
 app.listen(4000, () => console.log("listening on port 4000"));
