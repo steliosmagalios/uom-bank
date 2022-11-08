@@ -10,6 +10,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Example {
-  id Int @id @default(autoincrement())
+model User {
+  id      Int      @id @default(autoincrement())
+  account Account?
+}
+
+model Account {
+  id      Int   @id @default(autoincrement())
+  balance Float @db.DoublePrecision
+
+  // One-to-One relation of accounts and users
+  User   User @relation(fields: [userId], references: [id])
+  userId Int  @unique
 }
