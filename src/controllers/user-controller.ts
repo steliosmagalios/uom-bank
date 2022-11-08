@@ -4,7 +4,7 @@ import { prisma } from "..";
  * @param id The id of the user
  * @returns The user's current balance
  */
-async function balance(id: number): Promise<number> {
+async function balance(id: string): Promise<number> {
   try {
     // Find the user's account that matches the id
     const acc = await prisma.account.findUnique({ where: { userId: id } });
@@ -29,7 +29,7 @@ async function balance(id: number): Promise<number> {
  * @returns The new balance after the deposit
  * @throws Will throw an error if the user is not found
  */
-async function deposit(id: number, amount: number): Promise<number> {
+async function deposit(id: string, amount: number): Promise<number> {
   try {
     // Find the user's account that matches the id
     const acc = await prisma.account.findUnique({ where: { userId: id } });
@@ -60,7 +60,7 @@ async function deposit(id: number, amount: number): Promise<number> {
  * @returns The new balance after the withdrawal
  * @throws Will throw an error if the user is not found or the amount requested is greater than the user's balance
  */
-async function withdraw(id: number, amount: number): Promise<number> {
+async function withdraw(id: string, amount: number): Promise<number> {
   try {
     // Find the user's account that matches the id
     const acc = await prisma.account.findUnique({ where: { userId: id } });

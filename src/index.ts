@@ -18,6 +18,13 @@ app.post("/create", async (req, res) => {
   res.status(200).json(acc);
 });
 
+// utility encpoint to return all user ids. this shouldn't be in the final product
+app.get("/users", async (req, res) => {
+  const users = await prisma.user.findMany();
+
+  res.status(200).json(users);
+});
+
 // User routes
 app.use("/user/", userRoutes);
 

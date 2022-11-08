@@ -13,30 +13,14 @@ interface UserReqBody extends Request {
   body: z.infer<typeof userReqSchema>;
 }
 
-/**
- * Parses the user's id that is provided
- * @param idStr The id as provided from the request object
- * @returns The id parsed as an integer
- * @throws Will throw an error if the id provided is not an integer
- */
-function parseUserId(idStr: string): number {
-  try {
-    return parseInt(idStr);
-  } catch (err) {
-    throw new Error("ID needs to be an integer");
-  }
-}
-
 const router = Router();
 
 // GET <user_id>/account
 // Returns the user's balance
 router.get("/:user_id/account", async (req, res) => {
-  const uId = parseUserId(req.params.user_id);
-
   try {
     // Call the controller
-    const balance = await userController.balance(uId);
+    const balance = await userController.balance(req.params.user_id);
 
     // Return the new balance
     res.status(404).json({ balance });
@@ -52,11 +36,9 @@ router.patch(
   "/:user_id/account/withdraw",
   withSchema(userReqSchema),
   async (req: UserReqBody, res) => {
-    const uId = parseUserId(req.params.user_id);
-
     try {
       // Call the controller
-      const balance = await userController.withdraw(uId, req.body.amount);
+      const balance = await userController.withdraw(req.params.user_id, req.body.amount);
 
       // Return the new balance
       res.status(404).json({ balance });
@@ -73,11 +55,9 @@ router.patch(
   "/:user_id/account/deposit",
   withSchema(userReqSchema),
   async (req: UserReqBody, res) => {
-    const uId = parseUserId(req.params.user_id);
-
     try {
       // Call the controller
-      const balance = await userController.deposit(uId, req.body.amount);
+      const balance = await userController.deposit(req.params.user_id, req.body.amount);
 
       // Return the new balance
       res.status(404).json({ balance });
