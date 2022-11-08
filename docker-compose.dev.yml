@@ -1,0 +1,38 @@
+version: '3.8'
+
+# Just a postgres database for development
+services:
+  database:
+    container_name: 'dev_database'
+    image: 'postgres:latest'
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - ./server/.env.local
+    volumes:
+      - ./pgdata-dev:/var/lib/postgresql/data
+
+  server:
+    container_name: 'server'
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    depends_on:
+      - database
+    env_file:
+      - ./server/.env.local
+  
+  # client:
+  #   container_name: 'client'
+  #   build:
+  #     context: ./client
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - server
+
+    

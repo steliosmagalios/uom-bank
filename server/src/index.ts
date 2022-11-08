@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import cors from "cors";
 import express from "express";
 
 // Import routes
@@ -10,6 +11,7 @@ export const prisma = new PrismaClient();
 // Setup the server
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // utility endpoint, creates a new account with 0 balance
 app.post("/create", async (req, res) => {

@@ -6,7 +6,7 @@ services:
     image: 'postgres:latest'
     restart: always
     env_file:
-      - .env
+      - ./server/.env
     volumes:
       - pgdata-prod:/var/lib/postgresql/data
   
@@ -21,7 +21,7 @@ services:
     depends_on:
       - database
     env_file:
-      - .env
+      - ./server/.env
 
 volumes:
   pgdata-prod: {}
