@@ -18,7 +18,7 @@ async function balance(id: number): Promise<number> {
     return acc.balance;
   } catch (err: any) {
     // If an error occured during execution (most likely prisma) return a generic message
-    throw new Error("Error happened when calculating user's balance");
+    throw new Error("User's account couldn't be found");
   }
 }
 
@@ -49,7 +49,7 @@ async function deposit(id: number, amount: number): Promise<number> {
     return updatedAcc.balance;
   } catch (err: any) {
     // If an error occured during execution (most likely prisma) return a generic message
-    throw new Error("Error happened during deposit");
+    throw new Error("User's account couldn't be found");
   }
 }
 
@@ -85,7 +85,7 @@ async function withdraw(id: number, amount: number): Promise<number> {
     return updatedAcc.balance;
   } catch (err: any) {
     // If an error occured during execution (most likely prisma) return a generic message
-    throw new Error("Error happened during deposit");
+    throw new Error("User's account couldn't be found");
   }
 }
 
