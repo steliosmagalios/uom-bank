@@ -23,7 +23,7 @@ router.get("/:user_id/account", async (req, res) => {
     const balance = await userController.balance(req.params.user_id);
 
     // Return the new balance
-    res.status(404).json({ balance });
+    res.status(200).json({ balance });
   } catch (err: any) {
     // If an error occurs, return the relevant message to the user
     res.status(404).json({ error: err.message });
@@ -41,7 +41,7 @@ router.patch(
       const balance = await userController.withdraw(req.params.user_id, req.body.amount);
 
       // Return the new balance
-      res.status(404).json({ balance });
+      res.status(200).json({ balance });
     } catch (err: any) {
       // If an error occurs, return the relevant message to the user
       res.status(404).json({ error: err.message });
@@ -60,7 +60,7 @@ router.patch(
       const balance = await userController.deposit(req.params.user_id, req.body.amount);
 
       // Return the new balance
-      res.status(404).json({ balance });
+      res.status(200).json({ balance });
     } catch (err: any) {
       // If an error occurs, return the relevant message to the user
       res.status(404).json({ error: err.message });
