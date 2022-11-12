@@ -1,5 +1,9 @@
 # UoM Bank - A simple 3-tier app
 
+## Running
+To run the project you can use docker-compose.
+Simply run docker-compose up and go to localhost:80
+
 ## Endpoints
 
 The endpoints that the application exposes to the outside world (tier 1)
