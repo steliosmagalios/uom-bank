@@ -10,7 +10,6 @@ services:
     volumes:
       - pgdata-prod:/var/lib/postgresql/data
   
-  # TODO: wait-for
   server:
     container_name: 'server'
     build: 
@@ -22,6 +21,16 @@ services:
       - database
     env_file:
       - ./server/.env
+
+  client:
+    container_name: 'client'
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - server
 
 volumes:
   pgdata-prod: {}
